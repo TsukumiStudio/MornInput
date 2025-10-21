@@ -15,7 +15,7 @@ namespace MornInput
         [SerializeField] private Image _image;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private SpriteMask _spriteMask;
-        [Inject] private IMornInput _mornInput;
+        [Inject] private MornInputProvider _mornInputProvider;
         public Color IconColor
         {
             get => _image != null ? _image.color :
@@ -71,8 +71,8 @@ namespace MornInput
                     _spriteRenderer.SetPropertyBlock(_propertyBlock);
                 }
 
-                Adjust(_mornInput.CurrentScheme, true);
-                _mornInput.OnSchemeChanged.Subscribe(x => Adjust(x.next, false)).AddTo(this);
+                Adjust(_mornInputProvider.GetInput(0).CurrentScheme, true);
+                _mornInputProvider.GetInput(0).OnSchemeChanged.Subscribe(x => Adjust(x.next, false)).AddTo(this);
             }
         }
 

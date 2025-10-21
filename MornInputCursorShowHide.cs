@@ -7,7 +7,6 @@ namespace MornInput
     /// <summary>マウス/キー入力に応じてカーソル表示を制御し、非表示時はマウスレイキャストをブロックする</summary>
     public sealed class MornInputCursorShowHide : MonoBehaviour
     {
-        [Inject] private IMornInput _mornInput;
         private Texture2D _blankTexture;
         private Vector2 _lastMousePosition;
         private readonly float _mouseMoveThreshold = 0.1f;
