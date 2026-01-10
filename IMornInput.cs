@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MornInput
+namespace MornLib
 {
     public interface IMornInput
     {

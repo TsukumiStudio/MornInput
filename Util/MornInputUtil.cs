@@ -2,7 +2,7 @@ using System;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
-namespace MornInput
+namespace MornLib
 {
     public static class MornInputUtil
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace MornInput
+namespace MornLib
 {
     [RequireComponent(typeof(Canvas))]
     public sealed class MornInputRaycaster : GraphicRaycaster

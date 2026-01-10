@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using UniRx;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace MornInput
+namespace MornLib
 {
     public class MornInputHandler : IMornInput
     {

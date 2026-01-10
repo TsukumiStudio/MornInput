@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using VContainer;
 
-namespace MornInput
+namespace MornLib
 {
     /// <summary>マウス/キー入力に応じてカーソル表示を制御し、非表示時はマウスレイキャストをブロックする</summary>
     public sealed class MornInputCursorShowHide : MonoBehaviour

@@ -1,7 +1,7 @@
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
-namespace MornInput
+namespace MornLib
 {
     [ExecuteAlways]
     public sealed class MornPressableInputIconSetter : MonoBehaviour

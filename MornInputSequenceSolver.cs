@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using VContainer.Unity;
 
-namespace MornInput
+namespace MornLib
 {
     public sealed class MornInputSequenceSolver : IPostTickable
     {

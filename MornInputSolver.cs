@@ -4,7 +4,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace MornInput
+namespace MornLib
 {
     [RequireComponent(typeof(PlayerInput))]
     public sealed class MornInputSolver : MonoBehaviour, IMornInput
@@ -47,49 +47,49 @@ namespace MornInput
             }
         }
 
-        bool IMornInput.IsPressedAny(string actionName)
+        public bool IsPressedAny(string actionName)
         {
             var action = GetAction(actionName);
             return action?.AnyPressed() ?? false;
         }
 
-        bool IMornInput.IsPressedAll(string actionName)
+        public bool IsPressedAll(string actionName)
         {
             var action = GetAction(actionName);
             return action?.AllPressed() ?? false;
         }
 
-        bool IMornInput.IsPerformed(string actionName)
+        public bool IsPerformed(string actionName)
         {
             var action = GetAction(actionName);
             return action?.WasPerformedThisFrame() ?? false;
         }
 
-        bool IMornInput.IsPressingAny(string actionName)
+        public bool IsPressingAny(string actionName)
         {
             var action = GetAction(actionName);
             return action?.AnyPressing() ?? false;
         }
 
-        bool IMornInput.IsPressingAll(string actionName)
+        public bool IsPressingAll(string actionName)
         {
             var action = GetAction(actionName);
             return action?.AllPressing() ?? false;
         }
 
-        bool IMornInput.IsReleaseAny(string actionName)
+        public bool IsReleaseAny(string actionName)
         {
             var action = GetAction(actionName);
             return action?.AnyReleased() ?? false;
         }
 
-        bool IMornInput.IsReleaseAll(string actionName)
+        public bool IsReleaseAll(string actionName)
         {
             var action = GetAction(actionName);
             return action?.AllReleased() ?? false;
         }
 
-        T IMornInput.ReadValue<T>(string actionName)
+        public T ReadValue<T>(string actionName) where T : struct
         {
             var action = GetAction(actionName);
             return action != null ? action.ReadValue<T>() : default(T);

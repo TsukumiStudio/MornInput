@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace MornInput
+namespace MornLib
 {
     [CreateAssetMenu(fileName = nameof(MornPressableInputIconSettings), menuName = "Morn/" + nameof(MornPressableInputIconSettings))]
-    public class MornPressableInputIconSettings : ScriptableObject
+    internal class MornPressableInputIconSettings : ScriptableObject
     {
         public Color GrayTopColor;
         public Color GrayBottomColor;

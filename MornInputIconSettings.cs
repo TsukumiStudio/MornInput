@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace MornInput
+namespace MornLib
 {
     [CreateAssetMenu(fileName = nameof(MornInputIconSettings), menuName = "Morn/" + nameof(MornInputIconSettings))]
     internal sealed class MornInputIconSettings : ScriptableObject

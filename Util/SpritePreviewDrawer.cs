@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace MornInput
+namespace MornLib
 {
     [CustomPropertyDrawer(typeof(SpritePreviewAttribute))]
     internal sealed class SpritePreviewDrawer : PropertyDrawer

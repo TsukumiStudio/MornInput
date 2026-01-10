@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MornInput
+namespace MornLib
 {
     public sealed class MornInputGaugeWith : MonoBehaviour
     {

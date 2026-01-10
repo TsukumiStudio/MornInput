@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using VContainer;
 
-namespace MornInput
+namespace MornLib
 {
     [ExecuteAlways]
     internal sealed class MornInputIconSetter : MonoBehaviour

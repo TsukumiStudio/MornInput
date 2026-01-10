@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MornInput
+namespace MornLib
 {
     internal sealed class SpritePreviewAttribute : PropertyAttribute
     {
