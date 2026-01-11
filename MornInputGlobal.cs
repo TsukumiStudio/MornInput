@@ -5,7 +5,7 @@ namespace MornLib
     [CreateAssetMenu(fileName = nameof(MornInputGlobal), menuName = "Morn/" + nameof(MornInputGlobal))]
     internal sealed class MornInputGlobal : MornGlobalBase<MornInputGlobal>
     {
-        public override string ModuleName => "MornInput";
+        protected override string ModuleName => "MornInput";
         [SerializeField] private string _defaultSchemeKey;
         public string DefaultSchemeKey => _defaultSchemeKey;
 
