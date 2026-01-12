@@ -16,6 +16,11 @@ namespace MornLib
         string IMornInput.CurrentScheme => _playerInput.currentControlScheme;
         IObservable<(string prev, string next)> IMornInput.OnSchemeChanged => _schemeSubject;
 
+        private void Awake()
+        {
+            UpdateScheme();
+        }
+
         private void Reset()
         {
             _playerInput = GetComponent<PlayerInput>();
@@ -23,11 +28,16 @@ namespace MornLib
 
         private void Update()
         {
+            UpdateScheme();
+        }
+
+        private void UpdateScheme()
+        {
             try
             {
                 if (_playerInput == null)
                 {
-                    MornInputGlobal.LogError("PlayerInput is null in MornInputSolver.Update");
+                    MornInputGlobal.Logger.LogError("PlayerInput is null in MornInputSolver.Update");
                     return;
                 }
 
@@ -38,12 +48,13 @@ namespace MornLib
                 }
 
                 _schemeSubject.OnNext((_cachedControlScheme, currentControlScheme));
-                MornInputGlobal.Log($"ControlScheme changed: {_cachedControlScheme ?? "None"} -> {currentControlScheme}");
+                MornInputGlobal.Logger.Log(
+                    $"ControlScheme changed: {_cachedControlScheme ?? "None"} -> {currentControlScheme}");
                 _cachedControlScheme = currentControlScheme;
             }
             catch (Exception ex)
             {
-                MornInputGlobal.LogError($"Error in MornInputSolver.Update: {ex.Message}");
+                MornInputGlobal.Logger.LogError($"Error in MornInputSolver.Update: {ex.Message}");
             }
         }
 
@@ -101,7 +112,7 @@ namespace MornLib
             {
                 if (string.IsNullOrEmpty(actionName))
                 {
-                    MornInputGlobal.LogError("Action name is null or empty");
+                    MornInputGlobal.Logger.LogError("Action name is null or empty");
                     return null;
                 }
 
@@ -112,14 +123,14 @@ namespace MornLib
 
                 if (_playerInput?.actions == null)
                 {
-                    MornInputGlobal.LogError("PlayerInput or actions is null");
+                    MornInputGlobal.Logger.LogError("PlayerInput or actions is null");
                     return null;
                 }
 
                 action = _playerInput.actions[actionName];
                 if (action == null)
                 {
-                    MornInputGlobal.LogWarning($"Action '{actionName}' not found in PlayerInput");
+                    MornInputGlobal.Logger.LogWarning($"Action '{actionName}' not found in PlayerInput");
                     return null;
                 }
 
@@ -128,7 +139,7 @@ namespace MornLib
             }
             catch (Exception ex)
             {
-                MornInputGlobal.LogError($"Error getting action '{actionName}': {ex.Message}");
+                MornInputGlobal.Logger.LogError($"Error getting action '{actionName}': {ex.Message}");
                 return null;
             }
         }

@@ -56,12 +56,15 @@ namespace MornLib
             {
                 Adjust();
             }
-            
+
             if (_beforeIsPressed != isPressed || _beforeIsGrayscale != isGrayscale)
             {
-                _icon.IconColor = isGrayscale ? _pressableSettings.IconColor : isPressed ? _pressableSettings.IconPressedColor : _pressableSettings.IconColor;
-                _topBase.IconColor = isGrayscale ? _pressableSettings.GrayTopColor : isPressed ? _pressableSettings.TopPressedColor : _pressableSettings.TopColor;
-                _bottomBase.IconColor = isGrayscale ? _pressableSettings.GrayBottomColor : _pressableSettings.BottomColor;
+                _icon.IconColor = isGrayscale ? _pressableSettings.IconColor :
+                    isPressed ? _pressableSettings.IconPressedColor : _pressableSettings.IconColor;
+                _topBase.IconColor = isGrayscale ? _pressableSettings.GrayTopColor :
+                    isPressed ? _pressableSettings.TopPressedColor : _pressableSettings.TopColor;
+                _bottomBase.IconColor =
+                    isGrayscale ? _pressableSettings.GrayBottomColor : _pressableSettings.BottomColor;
                 var localPos = isPressed ? _pressableSettings.PressedOffset : _pressableSettings.NormalOffset;
                 _topBase.transform.localPosition = localPos;
                 _gaugeEmptyBase.transform.localPosition = localPos;
@@ -94,21 +97,21 @@ namespace MornLib
             if (_topSettings != null && _topBase.Settings != _topSettings)
             {
                 _topBase.Settings = _topSettings;
-                MornInputGlobal.Log("Settings Changed");
+                MornInputGlobal.Logger.Log("Settings Changed");
                 MornInputGlobal.SetDirty(_topBase);
             }
 
             if (_topMaskSettings != null && _topMaskBase.Settings != _topMaskSettings)
             {
                 _topMaskBase.Settings = _topMaskSettings;
-                MornInputGlobal.Log("Settings Changed");
+                MornInputGlobal.Logger.Log("Settings Changed");
                 MornInputGlobal.SetDirty(_topMaskBase);
             }
 
             if (_bottomSettings != null && _bottomBase.Settings != _bottomSettings)
             {
                 _bottomBase.Settings = _bottomSettings;
-                MornInputGlobal.Log("Settings Changed");
+                MornInputGlobal.Logger.Log("Settings Changed");
                 MornInputGlobal.SetDirty(_bottomBase);
             }
 
@@ -117,14 +120,14 @@ namespace MornLib
                 if (_gaugeEmptyBase.Settings != _gaugeSettings)
                 {
                     _gaugeEmptyBase.Settings = _gaugeSettings;
-                    MornInputGlobal.Log("Settings Changed");
+                    MornInputGlobal.Logger.Log("Settings Changed");
                     MornInputGlobal.SetDirty(_gaugeEmptyBase);
                 }
 
                 if (_gaugeFillBase.Settings != _gaugeSettings)
                 {
                     _gaugeFillBase.Settings = _gaugeSettings;
-                    MornInputGlobal.Log("Settings Changed");
+                    MornInputGlobal.Logger.Log("Settings Changed");
                     MornInputGlobal.SetDirty(_gaugeFillBase);
                 }
             }
@@ -132,14 +135,14 @@ namespace MornLib
             if (_iconSettings != null && _icon.Settings != _iconSettings)
             {
                 _icon.Settings = _iconSettings;
-                MornInputGlobal.Log("Settings Changed");
+                MornInputGlobal.Logger.Log("Settings Changed");
                 MornInputGlobal.SetDirty(_icon);
             }
 
             if (isPressed == _bottomBase.gameObject.activeSelf)
             {
                 _bottomBase.gameObject.SetActive(!isPressed);
-                MornInputGlobal.Log("BottomBase Changed");
+                MornInputGlobal.Logger.Log("BottomBase Changed");
                 MornInputGlobal.SetDirty(_bottomBase);
             }
 
@@ -147,14 +150,14 @@ namespace MornLib
             if (_topBase.IconColor != topColor)
             {
                 _topBase.IconColor = topColor;
-                MornInputGlobal.Log("TopColor Changed");
+                MornInputGlobal.Logger.Log("TopColor Changed");
                 MornInputGlobal.SetDirty(_topBase);
             }
 
             if (_bottomBase.IconColor != _pressableSettings.BottomColor)
             {
                 _bottomBase.IconColor = _pressableSettings.BottomColor;
-                MornInputGlobal.Log("BottomColor Changed");
+                MornInputGlobal.Logger.Log("BottomColor Changed");
                 MornInputGlobal.SetDirty(_bottomBase);
             }
 
@@ -162,35 +165,35 @@ namespace MornLib
             if (_icon.IconColor != iconColor)
             {
                 _icon.IconColor = iconColor;
-                MornInputGlobal.Log("BottomColor Changed");
+                MornInputGlobal.Logger.Log("BottomColor Changed");
                 MornInputGlobal.SetDirty(_bottomBase);
             }
 
             if (_gaugeEmptyBase.IconColor != _pressableSettings.GaugeEmptyColor)
             {
                 _gaugeEmptyBase.IconColor = _pressableSettings.GaugeEmptyColor;
-                MornInputGlobal.Log("GaugeEmptyColor Changed");
+                MornInputGlobal.Logger.Log("GaugeEmptyColor Changed");
                 MornInputGlobal.SetDirty(_gaugeEmptyBase);
             }
 
             if (_gaugeFillBase.IconColor != _pressableSettings.GaugeFillColor)
             {
                 _gaugeFillBase.IconColor = _pressableSettings.GaugeFillColor;
-                MornInputGlobal.Log("GaugeFillColor Changed");
+                MornInputGlobal.Logger.Log("GaugeFillColor Changed");
                 MornInputGlobal.SetDirty(_gaugeFillBase);
             }
 
             if (_gaugeEmptyBase.gameObject.activeSelf != showGauge)
             {
                 _gaugeEmptyBase.gameObject.SetActive(showGauge);
-                MornInputGlobal.Log("GaugeEmptyBase Changed");
+                MornInputGlobal.Logger.Log("GaugeEmptyBase Changed");
                 MornInputGlobal.SetDirty(_gaugeEmptyBase);
             }
 
             if (_gaugeFillBase.gameObject.activeSelf != showGauge)
             {
                 _gaugeFillBase.gameObject.SetActive(showGauge);
-                MornInputGlobal.Log("GaugeFillBase Changed");
+                MornInputGlobal.Logger.Log("GaugeFillBase Changed");
                 MornInputGlobal.SetDirty(_gaugeFillBase);
             }
 
@@ -198,21 +201,21 @@ namespace MornLib
             if (_topBase.transform.localPosition != localPos)
             {
                 _topBase.transform.localPosition = localPos;
-                MornInputGlobal.Log("TopBase Changed");
+                MornInputGlobal.Logger.Log("TopBase Changed");
                 MornInputGlobal.SetDirty(_topBase);
             }
 
             if (_gaugeEmptyBase.transform.localPosition != localPos)
             {
                 _gaugeEmptyBase.transform.localPosition = localPos;
-                MornInputGlobal.Log("GaugeEmptyBase Changed");
+                MornInputGlobal.Logger.Log("GaugeEmptyBase Changed");
                 MornInputGlobal.SetDirty(_gaugeEmptyBase);
             }
 
             if (_gaugeFillBase.transform.localPosition != localPos)
             {
                 _gaugeFillBase.transform.localPosition = localPos;
-                MornInputGlobal.Log("GaugeFillBase Changed");
+                MornInputGlobal.Logger.Log("GaugeFillBase Changed");
                 MornInputGlobal.SetDirty(_gaugeFillBase);
             }
         }

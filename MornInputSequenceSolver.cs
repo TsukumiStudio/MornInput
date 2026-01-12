@@ -27,7 +27,7 @@ namespace MornLib
         {
             if (keys == null || keys.Length == 0)
             {
-                MornInputGlobal.LogError("キーの配列が空です。少なくとも1つのキーを指定してください。");
+                MornInputGlobal.Logger.LogError("キーの配列が空です。少なくとも1つのキーを指定してください。");
                 return;
             }
 

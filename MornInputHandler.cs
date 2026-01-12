@@ -75,7 +75,7 @@ namespace MornLib
             {
                 if (string.IsNullOrEmpty(actionName))
                 {
-                    MornInputGlobal.LogError("Action name is null or empty");
+                    MornInputGlobal.Logger.LogError("Action name is null or empty");
                     return null;
                 }
 
@@ -86,14 +86,14 @@ namespace MornLib
 
                 if (_playerInput?.actions == null)
                 {
-                    MornInputGlobal.LogError("PlayerInput or actions is null");
+                    MornInputGlobal.Logger.LogError("PlayerInput or actions is null");
                     return null;
                 }
 
                 action = _playerInput.actions[actionName];
                 if (action == null)
                 {
-                    MornInputGlobal.LogWarning($"Action '{actionName}' not found in PlayerInput");
+                    MornInputGlobal.Logger.LogWarning($"Action '{actionName}' not found in PlayerInput");
                     return null;
                 }
 
@@ -102,7 +102,7 @@ namespace MornLib
             }
             catch (Exception ex)
             {
-                MornInputGlobal.LogError($"Error getting action '{actionName}': {ex.Message}");
+                MornInputGlobal.Logger.LogError($"Error getting action '{actionName}': {ex.Message}");
                 return null;
             }
         }
