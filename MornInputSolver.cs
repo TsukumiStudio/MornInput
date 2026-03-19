@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if USE_INPUTSYSTEM
+using System;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
@@ -145,3 +146,4 @@ namespace MornLib
         }
     }
 }
+#endif

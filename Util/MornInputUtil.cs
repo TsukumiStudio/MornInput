@@ -1,3 +1,4 @@
+#if USE_INPUTSYSTEM
 using System;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
@@ -63,3 +64,4 @@ namespace MornLib
         }
     }
 }
+#endif
