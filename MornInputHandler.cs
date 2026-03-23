@@ -13,6 +13,12 @@ namespace MornLib
         public MornInputHandler(PlayerInput playerInput)
         {
             _playerInput = playerInput;
+
+            // Game以外のActionMap（UI等）も有効化して全アクションを参照可能にする
+            foreach (var actionMap in playerInput.actions.actionMaps)
+            {
+                actionMap.Enable();
+            }
         }
 
         public string CurrentScheme => _playerInput.currentControlScheme;
