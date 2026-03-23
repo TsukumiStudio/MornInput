@@ -40,6 +40,10 @@ namespace MornLib
             }
         }
 
+        public IReadOnlyDictionary<PlayerInput, IMornInput> Inputs => _inputs;
+
+        public PlayerInputManager PlayerInputManager => _playerInputManager;
+
         public IMornInput GetInput(int playerIndex)
         {
             foreach (var input in _inputs)
