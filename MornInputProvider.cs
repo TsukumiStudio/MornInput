@@ -10,10 +10,19 @@ namespace MornLib
         [SerializeField] private PlayerInputManager _playerInputManager;
         private readonly Dictionary<PlayerInput, IMornInput> _inputs = new();
 
-        private void Start()
+        private void Awake()
         {
             _playerInputManager.onPlayerJoined += OnPlayerJoined;
             _playerInputManager.onPlayerLeft += OnPlayerLeft;
+        }
+
+        private void Start()
+        {
+            // プレイヤーが未Joinの場合、1人目を自動Joinさせる
+            if (_inputs.Count == 0)
+            {
+                _playerInputManager.JoinPlayer();
+            }
         }
         
         private void OnPlayerJoined(PlayerInput playerInput)
