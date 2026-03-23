@@ -45,6 +45,12 @@ namespace MornLib
 
             var clonedAsset = Instantiate(originalAsset);
             _uiInputModule.actionsAsset = clonedAsset;
+
+            // クローンしたActionAssetの全アクションを有効化
+            foreach (var actionMap in clonedAsset.actionMaps)
+            {
+                actionMap.Enable();
+            }
         }
         
         private void OnPlayerJoined(PlayerInput playerInput)
