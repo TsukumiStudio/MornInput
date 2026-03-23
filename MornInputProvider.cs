@@ -2,21 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.UI;
 
 namespace MornLib
 {
     public class MornInputProvider : MonoBehaviour
     {
         [SerializeField] private PlayerInputManager _playerInputManager;
-        [SerializeField] private InputSystemUIInputModule _uiInputModule;
+        [SerializeField] private InputActionAsset _globalUIActions;
         private readonly Dictionary<PlayerInput, IMornInput> _inputs = new();
 
         private void Awake()
         {
             _playerInputManager.onPlayerJoined += OnPlayerJoined;
             _playerInputManager.onPlayerLeft += OnPlayerLeft;
-            SetUpUIInputModule();
+
+            // グローバルUIアクションを有効化（PlayerInputManager管理外＝デバイス制限なし）
+            if (_globalUIActions != null)
+            {
+                foreach (var actionMap in _globalUIActions.actionMaps)
+                {
+                    actionMap.Enable();
+                }
+            }
         }
 
         private void Start()
@@ -25,31 +32,6 @@ namespace MornLib
             if (_inputs.Count == 0)
             {
                 _playerInputManager.JoinPlayer();
-            }
-        }
-
-        /// <summary>UIInputModuleのActionAssetを独立インスタンスに差し替え、全デバイスのUI操作を受け付ける</summary>
-        private void SetUpUIInputModule()
-        {
-            if (_uiInputModule == null)
-            {
-                return;
-            }
-
-            // PlayerInputManagerが管理するActionAssetとは別のインスタンスを作り、デバイス制限を受けないようにする
-            var originalAsset = _uiInputModule.actionsAsset;
-            if (originalAsset == null)
-            {
-                return;
-            }
-
-            var clonedAsset = Instantiate(originalAsset);
-            _uiInputModule.actionsAsset = clonedAsset;
-
-            // クローンしたActionAssetの全アクションを有効化
-            foreach (var actionMap in clonedAsset.actionMaps)
-            {
-                actionMap.Enable();
             }
         }
         
@@ -71,6 +53,12 @@ namespace MornLib
         public IReadOnlyDictionary<PlayerInput, IMornInput> Inputs => _inputs;
 
         public PlayerInputManager PlayerInputManager => _playerInputManager;
+
+        /// <summary>デバイス制限なしのグローバルUIアクションを取得</summary>
+        public InputAction GetGlobalUIAction(string actionName)
+        {
+            return _globalUIActions?.FindAction(actionName);
+        }
 
         public IMornInput GetInput(int playerIndex)
         {
