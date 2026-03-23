@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 namespace MornLib
 {
     public class MornInputProvider : MonoBehaviour
     {
         [SerializeField] private PlayerInputManager _playerInputManager;
+        [SerializeField] private InputSystemUIInputModule _uiInputModule;
         private readonly Dictionary<PlayerInput, IMornInput> _inputs = new();
 
         private void Awake()
         {
             _playerInputManager.onPlayerJoined += OnPlayerJoined;
             _playerInputManager.onPlayerLeft += OnPlayerLeft;
+            SetUpUIInputModule();
         }
 
         private void Start()
@@ -23,6 +26,25 @@ namespace MornLib
             {
                 _playerInputManager.JoinPlayer();
             }
+        }
+
+        /// <summary>UIInputModuleのActionAssetを独立インスタンスに差し替え、全デバイスのUI操作を受け付ける</summary>
+        private void SetUpUIInputModule()
+        {
+            if (_uiInputModule == null)
+            {
+                return;
+            }
+
+            // PlayerInputManagerが管理するActionAssetとは別のインスタンスを作り、デバイス制限を受けないようにする
+            var originalAsset = _uiInputModule.actionsAsset;
+            if (originalAsset == null)
+            {
+                return;
+            }
+
+            var clonedAsset = Instantiate(originalAsset);
+            _uiInputModule.actionsAsset = clonedAsset;
         }
         
         private void OnPlayerJoined(PlayerInput playerInput)
