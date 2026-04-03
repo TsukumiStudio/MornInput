@@ -111,20 +111,20 @@ namespace MornLib
             if (_image != null && (force || _image.sprite != sprite))
             {
                 _image.sprite = sprite;
-                MornInputGlobal.SetDirty(_image);
+                MornGlobalUtil.SetDirty(_image);
             }
 
             if (_spriteRenderer != null && (force || _spriteRenderer.sprite != sprite))
             {
                 _spriteRenderer.sprite = sprite;
                 _propertyBlock.SetTexture(_mainTex, sprite.texture);
-                MornInputGlobal.SetDirty(_spriteRenderer);
+                MornGlobalUtil.SetDirty(_spriteRenderer);
             }
 
             if (_spriteMask != null && (force || _spriteMask.sprite != sprite))
             {
                 _spriteMask.sprite = sprite;
-                MornInputGlobal.SetDirty(_spriteMask);
+                MornGlobalUtil.SetDirty(_spriteMask);
             }
         }
     }

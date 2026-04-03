@@ -8,10 +8,5 @@ namespace MornLib
         protected override string ModuleName => "MornInput";
         [SerializeField] private string _defaultSchemeKey;
         public string DefaultSchemeKey => _defaultSchemeKey;
-
-        internal static void SetDirty(Object obj)
-        {
-            I.SetDirtyInternal(obj);
-        }
     }
 }
