@@ -8,12 +8,31 @@ namespace MornLib
     public class MornInputProvider : MonoBehaviour
     {
         [SerializeField] private PlayerInputManager _playerInputManager;
+        [SerializeField] private InputActionAsset _globalUIActions;
         private readonly Dictionary<PlayerInput, IMornInput> _inputs = new();
 
-        private void Start()
+        private void Awake()
         {
             _playerInputManager.onPlayerJoined += OnPlayerJoined;
             _playerInputManager.onPlayerLeft += OnPlayerLeft;
+
+            // グローバルUIアクションを有効化（PlayerInputManager管理外＝デバイス制限なし）
+            if (_globalUIActions != null)
+            {
+                foreach (var actionMap in _globalUIActions.actionMaps)
+                {
+                    actionMap.Enable();
+                }
+            }
+        }
+
+        private void Start()
+        {
+            // プレイヤーが未Joinの場合、1人目を自動Joinさせる
+            if (_inputs.Count == 0)
+            {
+                _playerInputManager.JoinPlayer();
+            }
         }
         
         private void OnPlayerJoined(PlayerInput playerInput)
@@ -29,6 +48,16 @@ namespace MornLib
             {
                 Debug.Log($"Input removed: index {playerInput.playerIndex}");
             }
+        }
+
+        public IReadOnlyDictionary<PlayerInput, IMornInput> Inputs => _inputs;
+
+        public PlayerInputManager PlayerInputManager => _playerInputManager;
+
+        /// <summary>デバイス制限なしのグローバルUIアクションを取得</summary>
+        public InputAction GetGlobalUIAction(string actionName)
+        {
+            return _globalUIActions?.FindAction(actionName);
         }
 
         public IMornInput GetInput(int playerIndex)

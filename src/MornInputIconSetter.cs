@@ -74,8 +74,16 @@ namespace MornLib
                 }
 
 #if USE_INPUTSYSTEM
-                Adjust(_mornInputProvider.GetInput(0).CurrentScheme, true);
-                _mornInputProvider.GetInput(0).OnSchemeChanged.Subscribe(x => Adjust(x.next, false)).AddTo(this);
+                var input = _mornInputProvider.GetInput(0);
+                if (input != null)
+                {
+                    Adjust(input.CurrentScheme, true);
+                    input.OnSchemeChanged.Subscribe(x => Adjust(x.next, false)).AddTo(this);
+                }
+                else
+                {
+                    Adjust(MornInputGlobal.I.DefaultSchemeKey, true);
+                }
 #endif
             }
         }

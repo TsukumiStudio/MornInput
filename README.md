@@ -1,35 +1,34 @@
 # MornInput
 
+<p align="center">
+  <img src="src/Editor/MornInput.png" alt="MornInput" width="640" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/license/TsukumiStudio/MornInput" alt="License" />
+</p>
+
 ## 概要
 
-Unity Input Systemのラッパーで、複数プレイヤー入力管理を統一化するライブラリ。
+Unity Input System のラッパー。マルチプレイヤー入力管理・スキーム切替検知・入力アイコン表示などを統一化する。
 
-## 依存関係
+## 導入方法
 
-| 種別 | 名前 |
-|------|------|
-| 外部パッケージ | Unity Input System, UniRx |
-| Mornライブラリ | MornLib |
+Unity Package Manager で以下の Git URL を追加:
 
-## 使い方
-
-### 入力の取得
-
-```csharp
-// MornInputProviderでPlayerInputを管理
-var handler = MornInputProvider.GetHandler(playerIndex);
-
-// アクション名で入力を取得
-bool isPressed = handler.IsPressed("Jump");
-bool isPerformed = handler.IsPerformed("Attack");
-Vector2 move = handler.ReadValue<Vector2>("Move");
+```
+https://github.com/TsukumiStudio/MornInput.git?path=src#1.0.0
 ```
 
-### スキーム切り替え検知
+`Window > Package Manager > + > Add package from git URL...` に貼り付けてください。
 
-```csharp
-// キーボード/ゲームパッドの切り替えを検知
-handler.OnSchemeChanged.Subscribe(scheme => {
-    Debug.Log($"スキーム変更: {scheme}");
-});
-```
+### 依存パッケージ
+
+- [Unity Input System](https://docs.unity3d.com/Packages/com.unity.inputsystem@latest) (`com.unity.inputsystem`)
+- [UniRx](https://github.com/neuecc/UniRx) (`com.neuecc.unirx`)
+- [VContainer](https://github.com/hadashiA/VContainer) (`jp.hadashikick.vcontainer`)
+- [MornGlobal](https://github.com/TsukumiStudio/MornGlobal) (`com.tsukumistudio.mornglobal`)
+
+## ライセンス
+
+[The Unlicense](LICENSE)
