@@ -1,4 +1,5 @@
 ﻿#if USE_INPUTSYSTEM
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +11,8 @@ namespace MornLib
         [SerializeField] private PlayerInputManager _playerInputManager;
         [SerializeField] private InputActionAsset _globalUIActions;
         private readonly Dictionary<PlayerInput, IMornInput> _inputs = new();
+        /// <summary>PlayerInput の join/leave で発火。購読側は登録中の最小 playerIndex 等を再計算する</summary>
+        public static event Action OnPlayerInputsChanged;
 
         private void Awake()
         {
@@ -40,13 +43,15 @@ namespace MornLib
             playerInput.transform.SetParent(transform);
             _inputs.Add(playerInput, new MornInputHandler(playerInput));
             Debug.Log($"Input added: index {playerInput.playerIndex}");
+            OnPlayerInputsChanged?.Invoke();
         }
-        
+
         private void OnPlayerLeft(PlayerInput playerInput)
         {
             if (_inputs.Remove(playerInput))
             {
                 Debug.Log($"Input removed: index {playerInput.playerIndex}");
+                OnPlayerInputsChanged?.Invoke();
             }
         }
 
