@@ -15,9 +15,7 @@ namespace MornLib
         [SerializeField] private Image _image;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private SpriteMask _spriteMask;
-#if USE_INPUTSYSTEM
         [Inject] private MornInputProvider _mornInputProvider;
-#endif
         public Color IconColor
         {
             get => _image != null ? _image.color :
@@ -73,7 +71,6 @@ namespace MornLib
                     _spriteRenderer.SetPropertyBlock(_propertyBlock);
                 }
 
-#if USE_INPUTSYSTEM
                 var input = _mornInputProvider.GetInput(0);
                 if (input != null)
                 {
@@ -84,7 +81,6 @@ namespace MornLib
                 {
                     Adjust(MornInputGlobal.I.DefaultSchemeKey, true);
                 }
-#endif
             }
         }
 

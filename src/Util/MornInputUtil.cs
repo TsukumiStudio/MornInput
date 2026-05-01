@@ -1,4 +1,3 @@
-#if USE_INPUTSYSTEM
 using System;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
@@ -7,6 +6,17 @@ namespace MornLib
 {
     public static class MornInputUtil
     {
+        /// <summary>InputActionReference が指す Action を、PlayerInput が clone した actions から id 引きで取得する</summary>
+        public static InputAction FindAction(this PlayerInput playerInput, InputActionReference reference)
+        {
+            if (playerInput == null || reference == null || reference.action == null)
+            {
+                return null;
+            }
+
+            return playerInput.actions.FindAction(reference.action.id);
+        }
+
         public static bool AnyPressed(this InputAction action)
         {
             return Any(action, control => control.wasPressedThisFrame);
@@ -64,4 +74,3 @@ namespace MornLib
         }
     }
 }
-#endif

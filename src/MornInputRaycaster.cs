@@ -9,13 +9,11 @@ namespace MornLib
     {
         public override void Raycast(PointerEventData eventData, System.Collections.Generic.List<RaycastResult> resultAppendList)
         {
-#if USE_INPUTSYSTEM
             // カーソルが非表示の時はマウスによるレイキャストを行わない
             if (!MornInputCursorShowHide.IsMouseRaycastEnabled)
             {
                 return;
             }
-#endif
             base.Raycast(eventData, resultAppendList);
         }
     }
