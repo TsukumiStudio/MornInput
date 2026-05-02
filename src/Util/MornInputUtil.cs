@@ -6,7 +6,12 @@ namespace MornLib
 {
     public static class MornInputUtil
     {
-        /// <summary>InputActionReference が指す Action を、PlayerInput が clone した actions から id 引きで取得する</summary>
+        /// <summary>
+        /// InputActionReference が指す Action を、 PlayerInput が clone した actions から取得する。
+        /// 同一 InputActionAsset 参照なら id で一致するが、 別 asset 同士で名前だけ揃うケース
+        /// (MornUGUIGlobal の Cancel と ゲーム側 PlayerInput の Cancel など) も拾うため、
+        /// id ヒット失敗時は action.name で fallback 検索する。
+        /// </summary>
         public static InputAction FindAction(this PlayerInput playerInput, InputActionReference reference)
         {
             if (playerInput == null || reference == null || reference.action == null)
@@ -14,7 +19,13 @@ namespace MornLib
                 return null;
             }
 
-            return playerInput.actions.FindAction(reference.action.id);
+            var byId = playerInput.actions.FindAction(reference.action.id);
+            if (byId != null)
+            {
+                return byId;
+            }
+
+            return playerInput.actions.FindAction(reference.action.name);
         }
 
         public static bool AnyPressed(this InputAction action)
